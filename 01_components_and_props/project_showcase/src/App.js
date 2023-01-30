@@ -9,6 +9,8 @@
   
   // App Component => Highest Level in Our Component Hierarchy
 
+// import { someComponent } from "./somewhere";
+
 // Component Imports
 // . => /src
 import Header from "./components/Header";
@@ -24,6 +26,7 @@ function App() {
   // console.log(projects);
 
   return (
+    // <p>Testing</p>
     <>
       <Header 
         firstName="Louis"

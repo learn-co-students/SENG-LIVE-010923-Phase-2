@@ -9,6 +9,10 @@ function ProjectList({projects}) {
     // .map => Returns a New Array
 
     const ProjectListItems = projects.map(project => {
+        
+        // Reason for Including "key" Prop
+            // It Becomes More Difficult for React to Keep Track
+            // of Changes We Make to Lists of Components As We Scale Up
         return <ProjectListItem key={project.id} project={project}/>
     });
     
