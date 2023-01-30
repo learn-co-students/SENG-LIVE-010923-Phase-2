@@ -6,18 +6,18 @@
   // ProjectForm Component
   // ProjectList Component
   // ProjectListItem Component
-
-// Relative Path
-// Why Would I Want to Import My Data Here? (App Component)
   
   // App Component => Highest Level in Our Component Hierarchy
 
 // Component Imports
+// . => /src
 import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
 import ProjectList from "./components/ProjectList";
   // import ProjectListItem from "./components/ProjectListItem";
 
+// Relative Path
+// Why Would I Want to Import My Data Here? (App Component)
 import projects from "./projects";
 
 function App() {
@@ -34,7 +34,9 @@ function App() {
         // }}
       />
       <ProjectForm />
-      <ProjectList />
+      <ProjectList 
+        projects={projects}
+      />
     </>
   );
 }
