@@ -17,11 +17,11 @@ const App = () => {
   // Lifting Up State / Inverse Data Flow
 
     // Set Up State / Setter Function
-    const [isDarkMode, isDarkModeSetter] = useState(true);
+    const [isDarkMode, setDarkMode] = useState(true);
 
     // Helper Function
     function handleClick() {
-      isDarkModeSetter(!isDarkMode);
+      setDarkMode(!isDarkMode);
     }
 
   const appTheme = isDarkMode ? "App" : "App light";
