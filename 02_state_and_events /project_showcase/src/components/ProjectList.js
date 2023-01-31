@@ -54,7 +54,7 @@ const ProjectList = ({ projects }) => {
       <input 
         type="text" 
         placeholder="Search..."
-         onChange={handleSearch}
+        onChange={handleSearch}
       />
 
       <ul className="cards">{projectListItems}</ul>

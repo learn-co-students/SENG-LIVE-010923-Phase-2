@@ -18,6 +18,7 @@ const App = () => {
 
     // Set Up State / Setter Function
     const [isDarkMode, setDarkMode] = useState(true);
+    // const [somethingElse, setSomethingElse] = useState(true);
 
     // Helper Function
     function handleClick() {
@@ -27,14 +28,16 @@ const App = () => {
   const appTheme = isDarkMode ? "App" : "App light";
 
   return (
-    <div className={appTheme}>
-      <Header 
-        isDarkMode={isDarkMode}
-        handleClick={handleClick}
-      />
-      <ProjectForm />
-      <ProjectList projects={projects} />
-    </div>
+    <>
+      <div className={appTheme}>
+        <Header 
+          isDarkMode={isDarkMode}
+          handleClick={handleClick}
+        />
+        <ProjectForm />
+        <ProjectList projects={projects} />
+      </div>
+    </>
   );
 };
 

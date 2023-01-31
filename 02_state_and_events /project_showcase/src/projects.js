@@ -5,7 +5,7 @@ const projects = [
     about: "Plan your next adventure to in the U.S. National Parks!",
     phase: 4,
     link: "https://great-outdoors-guide.netlify.app",
-    image: "https://i.imgur.com/8GnP2Uw.png",
+    image: "https://i.imgur.com/8GnP2Uw.png"
   },
   {
     id: 2,
