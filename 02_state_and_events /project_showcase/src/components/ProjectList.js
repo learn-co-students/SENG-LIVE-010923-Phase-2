@@ -1,6 +1,15 @@
+// Set up State / Setter Function to Manage searchQuery
+// Set up Event Handler / Helper Function
+// Set up Filtering Logic for Displaying Projects that Match searchQuery
+
+import { useState } from 'react';
 import ProjectListItem from "./ProjectListItem";
 
 const ProjectList = ({ projects }) => {
+
+
+  // set up state
+  const [ searchQuery, setsearchQuery ] = useState()
 
   const projectListItems = projects.map((project) => (
     <ProjectListItem key={project.id} {...project} />
@@ -19,7 +28,7 @@ const ProjectList = ({ projects }) => {
         <button>Phase 2</button>
         <button>Phase 1</button>
       </div>
-      <input type="text" placeholder="Search..."/>
+      <input type="text" placeholder="Insert Search Query Here..."/>
 
       <ul className="cards">{projectListItems}</ul>
     </section>
