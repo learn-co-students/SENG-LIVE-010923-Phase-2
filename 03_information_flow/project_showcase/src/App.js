@@ -16,7 +16,9 @@ const App = () => {
       // Gives Us a More Flexible Way of Storing / Working With Our Data
   
     // Why Would We Choose An Array As Initial Value?
-      const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Request URL => /projects
 
@@ -51,6 +53,8 @@ const App = () => {
 
   const handleClick = () => setIsDarkMode(!isDarkMode);
 
+  const handleOnChange = (e) => setSearchQuery(e.target.value);
+
   const ProjectTheme = isDarkMode ? "App" : "App light" 
 
   return (
@@ -59,9 +63,15 @@ const App = () => {
         isDarkMode={isDarkMode}
         handleClick={handleClick}
       />
-      <ProjectForm />
+      <ProjectForm 
+        searchQuery={searchQuery}
+      />
       <button onClick={handleProjects}>Load Projects</button>
-      <ProjectList projects={projects} />
+      <ProjectList 
+        projects={projects}
+        searchQuery={searchQuery}
+        handleOnChange={handleOnChange}
+      />
     </div>
   );
 };
