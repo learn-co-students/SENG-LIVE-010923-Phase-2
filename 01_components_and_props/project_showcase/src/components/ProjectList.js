@@ -13,6 +13,10 @@ const ProjectList = ({projects}) => {
         return <ProjectListItem key={project.id} project={project} />
     });
 
+    function handleSearch() {
+
+    }
+
     return(
         <section>
         <h2>projects</h2>
@@ -28,7 +32,7 @@ const ProjectList = ({projects}) => {
         <input
         type="text"
         placeholder="Search..."
-            onChange={(e) => console.log(e.target)}
+            onChange={handleSearch}
         />
 
         <ul className="cards">{ProjectListItems}</ul>
