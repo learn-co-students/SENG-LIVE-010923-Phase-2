@@ -1,14 +1,12 @@
 import ProjectListItem from "./ProjectListItem";
 import { useState } from "react";
 
-const ProjectList = ({ projects, searchQuery, handleOnChange }) => {
+const ProjectList = ({ handleOnChange, searchResults }) => {
   
   // State to Manage User Input Values
   // const [searchQuery, setSearchQuery] = useState("");
 
-  const searchResults = projects.filter((project) => {
-    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+  
 
   const projectListItems = searchResults.map((project) => (
     <ProjectListItem key={project.id} {...project} />

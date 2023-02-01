@@ -1,8 +1,7 @@
-const ProjectForm = ({searchQuery}) => {
+const ProjectForm = () => {
   return (
     <section>
       <form className="form">
-        <h1>{searchQuery}</h1>
         <h3>Add New Project</h3>
         <label htmlFor="name">Name</label>
         <input type="text" id="name" name="name" />

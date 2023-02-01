@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
@@ -6,6 +6,11 @@ import ProjectList from "./components/ProjectList";
 
 // Previous Data Flow
 // import projects from "./projects";
+
+// Lifting State
+  // 1. Move State From Child Component Up To Parent Component
+  // 2. Move CB Function Up From Child Component To Parent Component
+  // 3. Pass Them Back Down As Props Where Needed
 
 const App = () => {
   
@@ -32,30 +37,52 @@ const App = () => {
   // Later On, We Will Be Using the "useEffect" Hook
   // to Load Up Our Projects and Only Set State Once
 
-  const handleProjects = () => {
-    // - When the button is clicked, make a fetch 
-    // request to "http://localhost:4000/projects"
-    // and set the `projects` state to the value 
-    // returned by the response
-
-    // By Default, When We Omit Second Arg, GET Request Is Fired 
+  useEffect(() => {
     fetch("http://localhost:4000/projects")
 
-      // .json() => Converting JSON Response to JS
-      .then(res => res.json())
+    // .json() => Converting JSON Response to JS
+    .then(res => res.json())
 
-      .then(projects => {
+    .then(projects => {
+      
+      // Update "projects" State With Array of Project Objects
+      setProjects(projects);
+    });
+  }, []);
+
+  // const handleProjects = () => {
+  //   // - When the button is clicked, make a fetch 
+  //   // request to "http://localhost:4000/projects"
+  //   // and set the `projects` state to the value 
+  //   // returned by the response
+
+  //   // By Default, When We Omit Second Arg, GET Request Is Fired 
+  //   fetch("http://localhost:4000/projects")
+
+  //     // .json() => Converting JSON Response to JS
+  //     .then(res => res.json())
+
+  //     .then(projects => {
         
-        // Update "projects" State With Array of Project Objects
-        setProjects(projects);
-      });
-  }
+  //       // Update "projects" State With Array of Project Objects
+  //       setProjects(projects);
+  //     });
+  // }
+
+  // If App Component Begins to Become Too Cluttered, We Can Always
+  // Create a New Component Just to Manage State(s)
+
+  // We've Moved Up Filtering Logic From ProjectList to App
+  // So That We Don't Need to Pass Down "projects" Any Longer
+  const searchResults = projects.filter((project) => {
+    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   const handleClick = () => setIsDarkMode(!isDarkMode);
 
   const handleOnChange = (e) => setSearchQuery(e.target.value);
 
-  const ProjectTheme = isDarkMode ? "App" : "App light" 
+  const ProjectTheme = isDarkMode ? "App" : "App light"; 
 
   return (
     <div className={ProjectTheme}>
@@ -63,13 +90,10 @@ const App = () => {
         isDarkMode={isDarkMode}
         handleClick={handleClick}
       />
-      <ProjectForm 
-        searchQuery={searchQuery}
-      />
-      <button onClick={handleProjects}>Load Projects</button>
+      <ProjectForm />
+      {/* <button onClick={handleProjects}>Load Projects</button> */}
       <ProjectList 
-        projects={projects}
-        searchQuery={searchQuery}
+        searchResults={searchResults}
         handleOnChange={handleOnChange}
       />
     </div>
