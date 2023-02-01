@@ -9,12 +9,21 @@ const ProjectList = ({ projects }) => {
 
 
   // set up state
-  const [ searchQuery, setsearchQuery ] = useState()
+  const [ searchQuery, setsearchQuery ] = useState("");
 
-  const projectListItems = projects.map((project) => (
+  const filteredlistItems = projects.filter(project => {
+    // only return projects whose names partially match search
+
+    return project.name.toLowerCase.includes(searchQuery.toLowerCase())
+  })
+
+  const projectListItems = filteredlistItems.map((project) => (
     <ProjectListItem key={project.id} {...project} />
   ));
 
+  function handleSearch(e) {
+    setsearchQuery(e.target.value);
+  }
 
   return (
     <section>
@@ -31,12 +40,11 @@ const ProjectList = ({ projects }) => {
       <input
         type="text"
         placeholder="Search..."
-        onChange={() => console.log("Something was Typed!")}
+            onChange={handleSearch}
+        />
 
-      />
-
-      <ul className="cards">{projectListItems}</ul>
-    </section>
+        <ul className="cards">{ProjectListItems}</ul>
+        </section>
   );
 };
 
