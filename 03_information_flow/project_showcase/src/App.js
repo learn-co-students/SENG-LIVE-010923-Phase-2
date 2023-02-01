@@ -9,8 +9,14 @@ import ProjectList from "./components/ProjectList";
 
 const App = () => {
   
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
   // Set Up State "projects" To Manage Data
-  const [projects, setProjects] = useState([]);
+    // Why? What Benefits?
+      // Gives Us a More Flexible Way of Storing / Working With Our Data
+  
+    // Why Would We Choose An Array As Initial Value?
+      const [projects, setProjects] = useState([]);
 
   // Request URL => /projects
 
@@ -43,11 +49,16 @@ const App = () => {
       });
   }
 
-  
+  const handleClick = () => setIsDarkMode(!isDarkMode);
+
+  const ProjectTheme = isDarkMode ? "App" : "App light" 
 
   return (
-    <div className="App">
-      <Header />
+    <div className={ProjectTheme}>
+      <Header 
+        isDarkMode={isDarkMode}
+        handleClick={handleClick}
+      />
       <ProjectForm />
       <button onClick={handleProjects}>Load Projects</button>
       <ProjectList projects={projects} />
