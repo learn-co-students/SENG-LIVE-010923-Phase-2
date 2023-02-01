@@ -14,6 +14,8 @@ import ProjectList from "./components/ProjectList";
 
 const App = () => {
   
+  // Inverse Data Flow
+    // isDarkMode => Set Higher Up, Passed Down as Prop to <Header />
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Set Up State "projects" To Manage Data

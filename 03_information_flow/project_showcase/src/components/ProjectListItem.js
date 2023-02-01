@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const ProjectListItem = ({ id, about, image, link, name, phase }) => {
 
+  // Why Would We Not Want to Move State From Here?
+    // clapCount => Is This Something That We Need Elsewhere in Our Component Hierarchy?
+    // Not Something That Would Be Shared Amongst Components
   const [clapCount, setClapCount] = useState(0);
 
   const handleClap = () => setClapCount(prevCount => prevCount + 1);

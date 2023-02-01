@@ -6,8 +6,6 @@ const ProjectList = ({ handleOnChange, searchResults }) => {
   // State to Manage User Input Values
   // const [searchQuery, setSearchQuery] = useState("");
 
-  
-
   const projectListItems = searchResults.map((project) => (
     <ProjectListItem key={project.id} {...project} />
   ));
