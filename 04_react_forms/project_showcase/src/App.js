@@ -27,12 +27,21 @@ const App = () => {
 
   const onToggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
+  // Create a Helper Function to Pass Down to ProjectForm
+  const handleAddProject = (formData) => {
+    
+    // ...projects => Unpacking The Original Array of Projects
+    // setProjects([...projects, formData]);
+    
+    // Safer / Best Practice Approach => Using a CB Function as Argument for setProjects
+    setProjects(prevProjectsList => [...prevProjectsList, formData]);
+  }
+
   return (
     <div className={isDarkMode ? "App" : "App light"}>
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
       <ProjectForm 
-        projects={projects}
-        setProjects={setProjects}
+        handleAddProject={handleAddProject}
       />
       <button onClick={handleClick}>Load Projects</button>
       <ProjectList projects={projects} />

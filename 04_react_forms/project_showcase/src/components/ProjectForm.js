@@ -8,11 +8,21 @@
 // DONE - Provide a `value` attribute to each form field that will return the 
 // associated piece of state
 
-// - Add an `onSubmit` event handler to the form
+// DONE - Add an `onSubmit` event handler to the form
+
+  // EXTRA => Enable POST Fetch Requests For Each New Form Submission
+
+// Create => POST
+
+// Read => GET
+
+// Update => PATCH (TBD)
+
+// Destroy => DELETE (TBD)
 
 import { useState } from "react";
 
-const ProjectForm = ({projects, setProjects}) => {
+const ProjectForm = ({handleAddProject}) => {
 
   // Creating Separate States for Each Input
   // const [name, setName] = useState("");
@@ -21,6 +31,7 @@ const ProjectForm = ({projects, setProjects}) => {
   // const [link, setLink] = useState("");
   // const [image, setImage] = useState("");
 
+  // Original formData Template 
   const initialFormValues = {
     name: "",
     about: "",
@@ -72,7 +83,34 @@ const ProjectForm = ({projects, setProjects}) => {
     e.preventDefault();
 
     // Next, we want to take "formData" (JS Object) and add it to the "projects" state (Array)
-    setProjects(projects => [...projects, formData]);
+    // setProjects(projects => [...projects, formData]);
+
+      // Optimistic Rendering
+      // handleAddProject(formData);
+    
+    // Build Out a POST Fetch Request
+
+    const configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }
+
+    fetch("http://localhost:4000/projects", configObj)
+      .then(res => res.json())
+      .then(newProject => {
+        
+        // Only After We Have Successfully Created a New Project in db.json
+        // Do We Add "newProject" to "projects" State
+
+        // Pessimistic Rendering
+        handleAddProject(newProject);
+      })
+      .catch(error => console.error(error));
+    
 
     // Clear Out Form Values Upon Successful Submission
     setFormData(initialFormValues);
