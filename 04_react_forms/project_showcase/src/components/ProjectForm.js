@@ -71,7 +71,13 @@ const ProjectForm = ({handleAddProject}) => {
       // event.target.name
       // event.target.value
     // JS Objects Can Only Have Unique Keys
+    
     setFormData({...formData, [name]: value });
+
+    // setFormData({...formData, name: "Testing"});
+    // setFormData({...formData, about: "Testing"});
+    // setFormData({...formData, phase: "1"});
+    // ...
 
     // What Will Happen Here? (Incorrect)
     // setFormData({...formData, name: value });
