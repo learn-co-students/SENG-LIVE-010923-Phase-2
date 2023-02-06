@@ -57,7 +57,7 @@ const App = () => {
       });
 
       // 3 Basic Phases of Component Lifecycle
-        // 1: Mounting (Initial Render)
+        // 1. Mounting (Initial Render)
         // 2. Updating (Re-Rendering)
         // 3. Unmounting (Removal of the Component from the DOM)
 

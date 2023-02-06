@@ -16,10 +16,20 @@ const Timer = () => {
     // useEffect
         // setTimeout / setInterval
     useEffect(() => {
+        
+        const consoleLog = () => {
+            console.log("Page Clicked!");
+        }
+
+        // Another Behavior That "Sticks"
+        document.addEventListener("click", consoleLog);
+        
+            
+
         const intervalId = setInterval(() => {
             
             // Indicates a Memory Leak in Application
-            console.log("Behavior Still Firing!");
+            // console.log("Behavior Still Firing!");
             
             // Callback Function As Argument for setCount
                 // Best Practice
@@ -29,12 +39,20 @@ const Timer = () => {
 
         // Clean Up Memory Leak
             // Think About Behavior. Does It Continue Once Component Has
-            // Been Unmounted from the DOM?
+            // Been Unmounted from the DOM? Does This Behavior STICK?
         return () => { 
             console.log("Side Effect Cleaned Up!");
             
-            clearInterval(intervalId);
+            cleanUpEverything();
         };
+
+        
+        // Not Cleaning Up Lingering Behaviors => Memory Leaks => Slower / Laggy UI for Users
+        function cleanUpEverything () {        
+            document.removeEventListener("click", consoleLog);
+
+            clearInterval(intervalId);
+        }
     }, [])
     
     return (
