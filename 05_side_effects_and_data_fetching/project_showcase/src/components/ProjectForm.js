@@ -60,9 +60,9 @@ const ProjectForm = ({ onAddProject, onError, projects }) => {
             return project.name !== name;
           });
 
-          // Invoke onError Function from App Component, Updating
-          // "projects" State With revertedProjectList Array / Undoing
-          // Optimistic Change
+          // // Invoke onError Function from App Component, Updating
+          // // "projects" State With revertedProjectList Array / Undoing
+          // // Optimistic Change
           onError(revertedProjectList);
       });
   }
