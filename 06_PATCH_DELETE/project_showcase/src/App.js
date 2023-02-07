@@ -3,6 +3,8 @@
 // U - Update Existing Projects
 // D - Destroy Existing Projects
 
+  // We Always Want to Update State Along With Our Data Changes
+
 import { useEffect, useState } from "react";
 
 import Header from "./components/Header";
