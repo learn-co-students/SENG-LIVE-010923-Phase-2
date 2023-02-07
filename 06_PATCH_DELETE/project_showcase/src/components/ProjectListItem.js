@@ -1,7 +1,7 @@
 // Deliverable 2: Click the delete button and make a 
 // DELETE request
 
-// - Attach an `onClick` event listener to the delete 
+// DONE - Attach an `onClick` event listener to the delete 
 // button
 
 // - Add a `DELETE` fetch request to the event handler 
@@ -23,7 +23,7 @@
   import { useState } from "react";
   import { FaPencilAlt, FaTrash } from "react-icons/fa";
   
-  const ProjectListItem = ({ project, enterProjectEditModeFor }) => {
+  const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) => {
     
     const { id, image, about, name, link, phase } = project;
   
@@ -35,7 +35,19 @@
       enterProjectEditModeFor(id);
     };
   
-    const handleDeleteClick = () => {};
+    const handleDeleteClick = () => {
+      
+      const configObj = {
+        method: "DELETE"
+      };
+  
+      // POST Request
+      fetch(`http://localhost:4000/projects/${id}`, configObj)
+        .then((resp) => resp.json())
+        .then(() => {
+          onDeleteProject(project.id);
+        });
+    };
   
     return (
       <li className="card">
