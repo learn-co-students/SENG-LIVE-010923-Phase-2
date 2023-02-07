@@ -1,15 +1,19 @@
 // Deliverable 1: Submit the edit project form and 
 // make a PATCH request
 
-  // Update the `useEffect` inside the `ProjectEditForm` 
+  // DONE - Update the `useEffect` inside the `ProjectEditForm` 
   // component so that the side effect will run upon 
   // `projectId` updates
 
-  // Inside of the `ProjectEditForm` component, update 
+    // Part 1: Persistence of Data Changes
+
+  // DONE - Inside of the `ProjectEditForm` component, update 
   // `handleSubmit` to include a `PATCH` request
 
-  // Include the updated state values in the `PATCH` 
+  // DONE - Include the updated formData state values in the `PATCH` 
   // request
+
+    // Part 2: Updation of State
 
   // Update the `projects` state in the parent 
   // component `App` using the `.map` function
@@ -18,11 +22,11 @@
     // original project excluded and the newly updated 
     // project included.
 
-  // Reset the edit form after submission is complete
+  // DONE - Reset the edit form after submission is complete
 
   import { useState, useEffect } from "react";
 
-  const ProjectEditForm = ({ projectId, completeEditing }) => {
+  const ProjectEditForm = ({ projectId, completeEditing, onUpdateProject }) => {
     const initialState = {
       name: "",
       about: "",
@@ -35,11 +39,15 @@
   
     const { name, about, phase, link, image } = formData;
   
+    // [] => Fire Off Effect On Initial Render And No More Afterwards
+    // [projectId] => Fire Off Effect On Initial Render + Every Time
+      // "projectId" changes
+
     useEffect(() => {
       fetch(`http://localhost:4000/projects/${projectId}`)
         .then((res) => res.json())
         .then((project) => setFormData(project));
-    }, []);
+    }, [projectId]);
   
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -48,11 +56,39 @@
   
     function handleSubmit(e) {
       e.preventDefault();
-      // Add code here
+
+      // PATCH vs. PUT
+        // PATCH => Makes One / Individual Changes And Leaves Other Data Intact
+        // PUT => Updates Entire Record With New Change And Omits Other Data
+
+      const configObj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(formData),
+      };
+  
+      // PATCH Request
+      fetch(`http://localhost:4000/projects/${projectId}`, configObj)
+        .then((resp) => resp.json())
+        .then((updatedProject) => {
+          
+          // Only Make a State Change After Fetch Request Has Properly
+          // Fired Off / We Have an Appropriate Response
+          onUpdateProject(updatedProject);
+          
+          setFormData(initialState);
+        });
+
+      // Resetting "projectId" to "null"
+      // to once again display <ProjectForm />
       completeEditing();
     }
   
     return (
+      // Controlled Form
       <form onSubmit={handleSubmit} className="form" autoComplete="off">
         <h3>Edit Project</h3>
   

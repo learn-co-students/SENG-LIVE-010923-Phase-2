@@ -1,3 +1,8 @@
+// C - Creating New Projects
+// R - Reading Existing Projects
+// U - Update Existing Projects
+// D - Destroy Existing Projects
+
 import { useEffect, useState } from "react";
 
 import Header from "./components/Header";
@@ -10,6 +15,7 @@ const App = () => {
   const [projects, setProjects] = useState([]);
   const [projectId, setProjectId] = useState(null);
 
+  // GET Request
   useEffect(() => {
     fetch("http://localhost:4000/projects")
       .then((resp) => resp.json())
@@ -20,9 +26,31 @@ const App = () => {
     setIsDarkMode((isDarkMode) => !isDarkMode);
   };
 
+  // Create
   const onAddProject = (newProj) => {
     setProjects((projects) => [...projects, newProj]);
   };
+
+  // Update
+  const onUpdateProject = (updatedProj) => {
+    // .map Over Existing "projects"
+    
+      // Creating New Array (updatedProjectList) Which
+      // Will Contain All Old Projects + Newly Updated Project
+      // In Place Of Old Project With Same ID
+      const updatedProjectList = projects.map(oldProject => {
+        if (updatedProj.id === oldProject.id) {
+          return updatedProj;
+        } else {
+          return oldProject;
+        }
+      });
+      
+      // Update "projects" State With Newest List
+      setProjects(updatedProjectList);
+  }
+
+  // Delete
 
   const completeEditing = () => {
     setProjectId(null);
@@ -38,6 +66,7 @@ const App = () => {
         <ProjectEditForm
           projectId={projectId}
           completeEditing={completeEditing}
+          onUpdateProject={onUpdateProject}
         />
       );
     } else {
