@@ -4,10 +4,10 @@
 // DONE - Attach an `onClick` event listener to the delete 
 // button
 
-// - Add a `DELETE` fetch request to the event handler 
+// DONE - Add a `DELETE` fetch request to the event handler 
 // for the delete button
 
-// - Update the `projects` state in the parent component
+// DONE - Update the `projects` state in the parent component
 // `App` using the `.filter` function
 
   //  The goal is to return a new array with the deleted project excluded
@@ -16,20 +16,42 @@
 
   // Deliverable 3: Click the claps button and persist the updated number of claps
 
-  // - Send a `PATCH` request when the `clapsCount` is updated through a click event
-  
-  // - Update the `projects` state in the parent component `App` using the `.map` function
+  // DONE - Send a `PATCH` request when the `clapsCount` is updated through a click event
 
   import { useState } from "react";
   import { FaPencilAlt, FaTrash } from "react-icons/fa";
   
   const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) => {
     
-    const { id, image, about, name, link, phase } = project;
+    const { id, image, about, name, link, phase, claps } = project;
   
-    const [clapCount, setClapCount] = useState(0);
+    // claps => Undefined
+    // claps => 5, 10, 15...
+
+    const [clapCount, setClapCount] = useState(claps || 0);
   
-    const handleClap = () => setClapCount(prevCount => prevCount + 1);
+    const handleClap = () => {
+      // Update Clap Count Optimistically
+      // setClapCount(prevCount => prevCount + 1);
+
+      const configObj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({claps: clapCount + 1}),
+      };
+  
+      // PATCH Request
+      fetch(`http://localhost:4000/projects/${id}`, configObj)
+        .then((resp) => resp.json())
+        .then(() => {
+          // Only Make a State Change After Fetch Request Has Properly
+          // Fired Off / We Have an Appropriate Response
+          setClapCount(prevCount => prevCount + 1);
+        });
+    };
   
     const handleEditClick = () => {
       enterProjectEditModeFor(id);
@@ -43,9 +65,8 @@
   
       // POST Request
       fetch(`http://localhost:4000/projects/${id}`, configObj)
-        .then((resp) => resp.json())
         .then(() => {
-          onDeleteProject(project.id);
+          onDeleteProject(project);
         });
     };
   
