@@ -1,6 +1,11 @@
 import { useState } from "react";
 
+import { useHistory } from "react-router-dom";
+
 const ProjectForm = ({ onAddProject }) => {
+  
+  const history = useHistory();
+  
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -36,6 +41,8 @@ const ProjectForm = ({ onAddProject }) => {
           link: "",
           image: "",
         });
+
+        history.push("/projects");
       });
   };
 
