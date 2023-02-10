@@ -8,6 +8,8 @@
   // - Wrap the `App` component inside of the `BrowserRouter` component 
   // that will be imported from the `react-router-dom` library
 
+  import { BrowserRouter as Router } from 'react-router-dom';
+
   import React from "react";
   import ReactDOM from "react-dom";
   import "./index.css";
@@ -15,9 +17,9 @@
   import App from "./App";
   
   ReactDOM.render(
-    <React.StrictMode>
+    <Router>
       <App />
-    </React.StrictMode>,
+    </Router>,
     document.getElementById("root")
   );
   
