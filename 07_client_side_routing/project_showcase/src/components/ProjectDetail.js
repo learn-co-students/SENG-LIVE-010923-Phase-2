@@ -2,6 +2,8 @@
 // to trigger appropriate GET requests
 
 import { useEffect, useState } from "react";
+
+// Import for useParams Hook
 import { useParams } from "react-router-dom";
 
 const ProjectDetail = () => {
@@ -9,6 +11,8 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // useParams() => Returns a JS Object
+  // console.log(useParams());
   const { id } = useParams();
 
   useEffect(() => {

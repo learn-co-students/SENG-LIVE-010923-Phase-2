@@ -88,6 +88,12 @@
             <ProjectForm onAddProject={onAddProject} />
           </Route>
 
+          {/* "/projects/:id" => Show Individual Project */}
+          {/* "/projects/:id" + /projects/:id/edit => Dynamic Routes */}
+          <Route path="/projects/:id">
+            <ProjectDetail />
+          </Route>
+
           {/* "/projects" => Project Index / Gallery */}
           <Route path="/projects">
             <ProjectList
@@ -95,9 +101,6 @@
               onDeleteProject={onDeleteProject}
             />
           </Route>
-          
-          {/* "/projects/:id" => Show Individual Project */}
-          {/* <ProjectDetail /> */}
         </Switch>
       </div>
     );
