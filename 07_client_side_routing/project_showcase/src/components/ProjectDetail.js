@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 // Import for useParams Hook
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ProjectDetail = () => {
   const [claps, setClaps] = useState(0);
@@ -61,6 +61,7 @@ const ProjectDetail = () => {
             <span className="badge blue">Phase {phase}</span>
           </div>
         </div>
+        <Link to="/projects">Go Back To Projects</Link>
       </div>
     </section>
   );
