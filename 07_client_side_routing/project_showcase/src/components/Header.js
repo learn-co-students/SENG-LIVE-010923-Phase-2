@@ -1,9 +1,11 @@
 // Deliverable 3: Add navigation to the application using the `Link` and 
 // `NavLink` components
 
-  // - Convert any html anchor tags to `Link` or `NavLink`
+import { Link, NavLink } from "react-router-dom";
 
-  // - Demonstrate the difference between `Link` and `NavLink`
+  // DONE - Convert any html anchor tags to `Link` or `NavLink`
+
+  // DONE - Demonstrate the difference between `Link` and `NavLink`
 
   const Header = ({ isDarkMode, onToggleDarkMode }) => {
     const buttonTextContent = isDarkMode ? "Light Mode" : "Dark Mode";
@@ -13,15 +15,25 @@
         <nav>
           <h1 className="branding">
             <span className="logo">{"//"}</span>
-            Project Showcase
+            <Link to="/">
+              Project Showcase
+            </Link>
           </h1>
           <div className="navigation">
-            <a className="button" href="/projects">
+            
+            {/* Current Problem => Default Behavior of Clicking on <a>
+            Elements is a Page Refresh */}
+            
+            {/* NavLink => exact to="<some URL>" */}
+
+              {/* When we are at <some URL>, we want "active" styling
+              // to kick in for our NavLink Component */}
+            <NavLink className="button" exact to="/projects">
               All Projects
-            </a>
-            <a className="button" href="/projects/new">
+            </NavLink>
+            <NavLink className="button" exact to="/projects/new">
               Add Project
-            </a>
+            </NavLink>
             <button onClick={onToggleDarkMode}>{buttonTextContent}</button>
           </div>
         </nav>
