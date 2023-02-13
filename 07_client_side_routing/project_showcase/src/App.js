@@ -70,6 +70,7 @@
         <Switch>
           
           {/* "/" => Root Route / Main Page */}
+          {/* exact => true */}
           <Route exact path="/">
             <Home />
           </Route>
@@ -97,6 +98,7 @@
           {/* "/projects" => Project Index / Gallery */}
           <Route path="/projects">
             <ProjectList
+              someProp
               projects={projects}
               onDeleteProject={onDeleteProject}
             />
