@@ -13,6 +13,18 @@
   transition: background-color 0.2s;
 } */
 
+/* .App {
+    color: var(--color);
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.App.light {
+  --color: var(--black);
+  --background: var(--white);
+  --primary: var(--dark-turquoise);
+} */
+
 button.active,
 button:focus,
 button:hover,
