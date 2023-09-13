@@ -6,25 +6,42 @@ import ProjectList from "./components/ProjectList";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // # Deliverable 1: Configure a <button> in our App 
-  // that will use json-server to fetch projects 
+
+
+  // # Deliverable 1: Configure a <button> in our App
+  // that will use json-server to fetch projects
   // and store them in state
 
-  // - Add an onClick event listener to the "Load Projects" 
+  // - Add an onClick event listener to the "Load Projects"
   // button
+  const handleProjects = () => {
+    fetch("http://localhost:4000/projects")
+      .then(res => res.json())
+      .then(projects => {
+        setProjects(projects)
+      })
+  }
 
-  // - When the button is clicked, make a fetch 
-  // request to "http://localhost:4000/projects"
-  // and set the `projects` state to the value 
-  // returned by the response
+  const handleClick = () => setIsDarkMode(!isDarkMode);
+  const handleOnChange = (e) => setSearchQuery(e.target.value);
+
+
+  const ProjectTheme = isDarkMode ?  "App" : "App light"
 
   return (
-    <div className="App">
-      <Header />
-      <ProjectForm />
-      <button>Load Projects</button>
-      <ProjectList projects={projects} />
+    <div className={ProjectTheme}>
+      <Header
+        isDarkMode={isDarkMode}
+        handleClick={handleClick} />
+      <ProjectForm searchQuery={searchQuery} />
+      <button onClick={handleProjects}>Load Projects</button>
+      <ProjectList
+        projects={projects}
+        searchQuery={searchQuery}
+        handleOnChange={handleOnChange} />
     </div>
   );
 };
